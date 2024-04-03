@@ -5,12 +5,13 @@ import * as Yup from 'yup';
 
 import css from './ContactForm.module.css';
 
-const ContactForm = ({ contactsList, onSubmit }) => {
+const ContactForm = ({ onSubmit, contactsList }) => {
   const nameFieldId = useId();
   const numberFieldId = useId();
 
-  const handleFormSubmit = values => {
+  const handleFormSubmit = (values, actions) => {
     onSubmit([...contactsList, { id: nanoid(), ...values }]);
+    actions.resetForm();
   };
 
   const ContactSchema = Yup.object().shape({
