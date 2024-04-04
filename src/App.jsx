@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react'
-import ContactForm from './components/ContactForm/ContactForm'
-import ContactList from './components/ContactList/ContactList'
-import SearchBox from './components/SearchBox/SearchBox'
-import './App.css'
+import { useState, useEffect } from 'react';
+import ContactForm from './components/ContactForm/ContactForm';
+import ContactList from './components/ContactList/ContactList';
+import SearchBox from './components/SearchBox/SearchBox';
+import './App.css';
+
 
 function App() {
   const [contactsList, setContactList] = useState(() => {
@@ -27,6 +28,10 @@ function App() {
 
   const [filters, setFilter] = useState('');
 
+  const addContact = contact => {
+    setContactList([...contactsList, contact]);
+  };
+  
   const visibleContacts = contactsList.filter(({ name }) => {
     return name.toLowerCase().includes(filters.toLowerCase().trim());
   });
@@ -42,12 +47,11 @@ function App() {
   return (
     <div>
       <h1>Phonebook</h1>
-      <ContactForm contactsList={contactsList} onSubmit={setContactList} />
+      <ContactForm contactsList={contactsList} onSubmit={addContact} />
       <SearchBox filter={filters} onFilter={setFilter} />
       <ContactList contactsList={visibleContacts} onDelete={contactDelete} />
     </div>
   );
 }
 
-
-export default App
+export default App;

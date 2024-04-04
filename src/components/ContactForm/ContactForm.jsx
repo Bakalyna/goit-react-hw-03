@@ -5,12 +5,12 @@ import * as Yup from 'yup';
 
 import css from './ContactForm.module.css';
 
-const ContactForm = ({ onSubmit, contactsList }) => {
+const ContactForm = ({ onSubmit }) => {
   const nameFieldId = useId();
   const numberFieldId = useId();
 
   const handleFormSubmit = (values, actions) => {
-    onSubmit([...contactsList, { id: nanoid(), ...values }]);
+    onSubmit({ id: nanoid(), ...values });
     actions.resetForm();
   };
 
@@ -46,3 +46,4 @@ const ContactForm = ({ onSubmit, contactsList }) => {
   );
 };
 export default ContactForm;
+
